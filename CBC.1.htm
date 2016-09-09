@@ -1,0 +1,98 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>C-BC -- Extended BC v1</title>
+</head>
+<body>
+
+<p align=justify>
+<b><font size=+3>C-BC – Extended BC v1.2</font></b><br>
+<i>cbc - An arbitrary precision calculator language based on BC</i><br>
+Initially released 1993 August 23
+</p>
+
+<p align=justify>
+<b><font size=+2>Syntax</font></b><br>
+<b>cbc</b> [<b>-hlv?</b>] [<i>file ...</i>]
+</p>
+
+<p align=justify>
+<b><font size=+2>Description</font></b><br>
+<b>cbc</b> is a language based on <b>bc</b>, which supports calculations on
+arbitrary precision numbers and interactive execution of statements.  The
+syntax of the language is made to look more similar to ANSI-C, but in large
+part respects compatibility with POSIX-BC.
+</p>
+
+<p align="justify">
+The program starts by processing code from all the files listed on the command
+line in the order listed, and then accepts input from standard input.  If the
+-l option is listed, then the first file to be read will be the standard math
+library.  Code is compiled on the fly and then executed immediately after it
+is read, if executable.  The commands <b>halt</b> and <b>quit</b> will stop
+<b>cbc</b>.  The main difference between these two is that the former will be
+carried out <i>if and when executed</i> and the latter <b>when read</b>.
+</p>
+
+<p align="justify">
+This language extends <b>bc</b> in several significant directions.  A more
+complete set of statements, drawn from the ANSI-C syntax, is implemented (even
+including the goto statement).  A few more of the ANSI-C operators are added,
+and a typing system is implemented, which currently includes a type for real
+numbers, complex numbers, numbers from finite galois fields, and strings.
+Declaration syntax is made to resemble ANSI-C more.  Pointers and arrays can
+be declared and used in a way similar to C.
+</p>
+
+<p align=justify>
+<b><font size=+2>Options</font></b><br>
+<li><b>-l</b>: Include the standard math library.</li>
+<li><b>-h</b>: Print out information on the command line syntax of <b>cbc</b>.</li>
+<li><b>-?</b>: Equivalent to -h.</li>
+<li><b>-v</b>: Print out the version information of <b>cbc</b>.</li>
+</p>
+
+<p align=justify>
+<b><font size=+2>Diagnostics</font></b><br>
+Most diagnostics should be fairly self-explanatory.  If you are not sure of
+the meanings of the messages printed out, you should refer to the <i>C-BC
+Reference</i>. A more complete description of the language is also contained
+therein.
+</p>
+
+<p align=justify>
+<b><font size=+2>Bugs</font></b><br>
+None known to date.  However, this is only version 1 of C-BC.
+</p>
+
+<p align=justify>
+<b><font size=+2>Conformance</font></b><br>
+Most of the POSIX Standard BC features are part of C-BC.  However, since C-BC
+is a strongly typed language, functions can only be declared one way in a C-BC
+program, and must be declared or defined before first use.  But they can still
+be redefined as long as the redefined function has an equivalent prototype.
+</p>
+
+<p align=justify>
+Strings are also handled slightly differently in that any character sequence
+of the form \\X inside a string is treated as a literal character X (e.g.
+&quot;\\&quot;&quot; is a string consisting of a single quote).  In some
+contexts, C escape sequences will be recognized (such as \\n, \\t, etc.)  See
+documentation for more details.
+</p>
+
+<p align=justify>
+<b><font size=+2>Author</font></b><br>
+Mark Hopkins
+</p>
+
+<p align=justify>
+<b><font size=+2>Acknowledgements</font></b><br>
+The author would like to thank Dr. G. Davida for providing information during
+the research phase of the project on finite fields and their applications. All
+the commonly available versions of BC, including Berkeley BC, POSIX BC, GNU
+BC, and Coherent BC, as well as lesser known extensions to BC, such as EBC,
+have contributed to the final design of C-BC.
+</p>
+</body>
+</html>

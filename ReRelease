@@ -1,0 +1,43 @@
+Path: archiver1.google.com!news1.google.com!newsfeed.stanford.edu!xuxa.iecc.com!nerds-end
+From: whopk...@alpha2.csd.uwm.edu (Mark William Hopkins)
+Newsgroups: comp.compilers
+Subject: "New" Implementation of UNIX BC -- Rerelease Of C-BC
+Date: 27 Oct 2001 18:41:33 -0400
+Organization: University of Wisconsin - Milwaukee, Computing Services   Division
+Lines: 59
+Approved: compil...@iecc.com
+Message-ID: <01-10-136@comp.compilers>
+NNTP-Posting-Host: tom.iecc.com
+X-Trace: xuxa.iecc.com 1004222493 2760 208.31.42.38 (27 Oct 2001 22:41:33 GMT)
+X-Complaints-To: abuse@iecc.com
+NNTP-Posting-Date: 27 Oct 2001 22:41:33 GMT
+Keywords: available
+Posted-Date: 27 Oct 2001 18:41:33 EDT
+X-submission-address: compil...@iecc.com
+X-moderator-address: compilers-requ...@iecc.com
+X-FAQ-and-archives: http://compilers.iecc.com
+
+This is a re-release of version 1.1 of C-BC, originally released in August of 1993. The source code, as well as numerous detailed notes on the language and its implementation and underlying architecture may be found under "The C-BC Programming Language" at
+	http://www.csd.uwm.edu/~whopkins
+Also included there is a revised copy of a lengthy writeup on the language which was originally posted here under
+		August 26, 1995 comp.compilers
+	Subject: Case Study 2: How to build your own stack frames.
+
+(1) Introduction To C-BC
+The standard BC language is a stack-based typeless calculator language that works only with arbitrary precision numbers and one-dimensional arrays of numbers and a very limited subset of C's syntax.
+
+C-BC is a major extension UNIX BC large enough that it comes close to actually being a C interpreter. It incorporates a much larger subset of C syntax, including an almost complete set of C statements and expressions, as well as pointers and arrays of arbitrary dimension. There is functionality in C-BC that is equivalent to or that surpasses most of the extensions of BC that are in GNU-BC, even as of the latest 2001 release (except support for "small" numeric types).
+
+The type system incorporated in this implementation of C-BC includes support for complex numbers, finite Galois Fields, and limited support for strings. Other implementations may be built on different type systems, so that C-BC actually comprises a family of related languages.
+
+(2) An Interpreter Without Control Flow
+The underlying architecture is a purely expressions-based language, with no control flow. The language is infinitary and the expressions are "rational". A rational expression may be infinite, but in such a way that it consists of only a finite number of distinct subterms.
+
+At this level, there is no control flow. Nor would it be accurate to say that there are "control flow expressions". Instead, the expression, itself, IS the control flow. The happens through the correspondence:
+	Label/State <--> Subexpression
+	Goto <---------> Expression/Subexpression relation
+The process of evaluating the infinitary expression is where one achieves the virtual effect of control flow, yet the same reduction semantics applies as would if the expressions were finite.
+
+Though C-BC is not actually a functional programming language, its design bridges the gap between imperative and functional languages (in a way that is distinct from and precedes by a few years the monad-based "Imperative-Functional Language" paradigm) and sets the stage for new languages which synthesize the two language families. Related articles may be found under
+	"Infinite Lambda Calculus, SEQCD & Imperative Functional Languages"
+at the above-mentioned web site.
