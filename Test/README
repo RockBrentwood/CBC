@@ -1,0 +1,5 @@
+This file list is from the original 1993 archive; there are no guarantees for 100% correctness or accuracy with the current version of the math.b library.
+
+An expanded (and more thoroughly validated) archive will be later added and integrated into a "make test" routine.
+
+For now, Run.sh -- suitable for Linux platforms -- may be called directly from this directory.
