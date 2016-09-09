@@ -1,9 +1,7 @@
-The Examples archive is in major flux; this is a snapshot from the 1993. An expanded (and more thoroughly tested) version is forthcoming. User contributions are more than welcome.
-
-Some of these examples are modifications of what are (or were) included in the examples archives of GNU-BC or Berkeley BC. These were the issues that arise in porting over to C-BC. It didn't take more than a few minutes to fix them all.
+These were the problems brought up by porting your programs over to C-BC. It didn't take more than a few minutes to fix them all.
 
 Major points of incompatibility with GNU-BC:
-* "<-" is used in place of "print". I changed them all.
+* <- used in place of "print". I changed them all.
 
 * "log" and "number" are keywords in C-BC. They were used in a couple places in the programs. I changed "log" to "log_b" and "number" to "num"
 
