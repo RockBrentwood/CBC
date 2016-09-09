@@ -1,0 +1,53 @@
+Instructions for making this program for DOS/Windows by LCC-WIN32 on Linux using Wine:
+It IS possible to cross-cross-compile this program: that is "cross-compile" where the compiler itself is on the target platform,
+using Wine. This will work with LCC; as long as you have LCC present somewhere on your machine with the key files in the LCC directory linked
+to the current directory. Assuming the LCC directory is
+	/media/DriveC/lcc/
+the links required are:
+	ln -s /media/DriveC/lcc/include/ctype.h .
+	ln -s /media/DriveC/lcc/include/limits.h .
+	ln -s /media/DriveC/lcc/include/math.h .
+	ln -s /media/DriveC/lcc/include/safelib.h .
+	ln -s /media/DriveC/lcc/include/stdarg.h .
+	ln -s /media/DriveC/lcc/include/stddef.h .
+	ln -s /media/DriveC/lcc/include/stdio.h .
+	ln -s /media/DriveC/lcc/include/stdlib.h .
+	ln -s /media/DriveC/lcc/include/string.h .
+	ln -s /media/DriveC/lcc/include/_syslist.h .
+	ln -s /media/DriveC/lcc/include/tgmath.h .
+	ln -s /media/DriveC/lcc/lib .
+Then, again assuming the location indicated above for the lcc directory, the following modification of the generic Makefile should work:
+
+CC=wine /media/DriveC/lcc/bin/lcc.exe
+LN=wine /media/DriveC/lcc/bin/lcclnk.exe
+CFLAGS=-O
+O=.obj
+X=.exe
+
+CBC_OBJS=C_BC$O Statement$O Expression$O Symbol$O Scan$O Load$O Execute$O Galois$O Number$O Complex$O
+all:	cbc$X
+cbc$X:	$(CBC_OBJS)
+	$(LN) -o cbc$X $(CBC_OBJS) $(LINK_FLAGS)
+C_BC$O:		C_BC.c Scan.h Load.h Symbol.h Version.h
+	$(CC) -c $(CFLAGS) C_BC.c
+Galois$O:	Galois.c Galois.h
+	$(CC) -c $(CFLAGS) Galois.c
+Number$O:	Number.c Number.h
+	$(CC) -c $(CFLAGS) Number.c
+Complex$O:	Complex.c Number.h Complex.h
+	$(CC) -c $(CFLAGS) Complex.c
+Symbol.h:	Galois.h Number.h Complex.h
+Symbol$O:	Symbol.c Scan.h Load.h Symbol.h
+	$(CC) -c $(CFLAGS) Symbol.c
+Scan$O:		Scan.c Scan.h
+	$(CC) -c $(CFLAGS) Scan.c
+Expression$O:	Expression.c Scan.h Load.h Symbol.h
+	$(CC) -c $(CFLAGS) Expression.c
+Statement$O:	Statement.c Scan.h Load.h Symbol.h
+	$(CC) -c $(CFLAGS) Statement.c
+Load$O:		Load.c Scan.h Load.h Symbol.h Execute.h
+	$(CC) -c $(CFLAGS) Load.c
+Execute$O:	Execute.c Scan.h Load.h Symbol.h Execute.h
+	$(CC) -c $(CFLAGS) Execute.c
+clean:
+	$(RM) *$O

@@ -1,0 +1,28 @@
+=== Expression.c ===
+168c168,169
+<       Generate(";%p", LookUp(Name, ARRAY, &Type));
+---
+>       int Id = LookUp(Name, L == RBR? ARRAY: POINTER, &Type);
+>       if (IsArray(Type)) Generate(";%p", Id);
+
+=== Symbol.c ===
+360c360,370
+<    Node N = Find(Name, Tag);
+---
+>    Node N = Find(Name, Tag == POINTER? ARRAY: Tag);
+> // A "pointer" variable occurs in the context v[n], which is either:
+> //	*(v[] + n), if v[] is already declared as an array variable,
+> //	*(v + n), if v has only been declared as a (pointer) variable, but not as an array variable,
+> //	*(v[] + n), otherwise, if v has been declared as neither; in which case it becomes a newly-declared array variable.
+>    if (Tag == POINTER) {
+>       Tag = ARRAY;
+>       if (ATab[N->Addr] == NULL) {
+>          Node N1 = Find(Name, VARIABLE); if (VTab[N1->Addr] != NULL) N = N1, Tag = VARIABLE;
+>       }
+>    }
+
+=== Symbol.h ===
+6c6
+< typedef enum { FUNCTION, ARRAY, VARIABLE, LABEL } SymTag;
+---
+> typedef enum { FUNCTION, ARRAY, POINTER, VARIABLE, LABEL } SymTag;
