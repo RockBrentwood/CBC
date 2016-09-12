@@ -6,7 +6,7 @@
 <body>
 
 <p align=justify>
-<b><font size=+3>C-BC – Extended BC v1.2</font></b><br>
+<b><font size=+3>C-BC – Extended BC v1.4</font></b><br>
 <i>cbc - An arbitrary precision calculator language based on BC</i><br>
 Initially released 1993 August 23
 </p>
@@ -62,7 +62,13 @@ therein.
 
 <p align=justify>
 <b><font size=+2>Bugs</font></b><br>
-None known to date.  However, this is only version 1 of C-BC.
+<ul>
+<li>Numerals are not always consistently trimmed to the minimum number of decimal places.</li>
+<li>Negative 0's may fail to compare correctly.</li>
+<li>The string read routine does not return any indication of end of file.</li>
+<li>The math.b routines return results that may be further off in the lowest-order digits than they need to be.</li>
+<li>A conflict between dynamic scoping and static typing can lead to a program abort. Support for type conversion is needed, particularly number &lrarr; string conversion. Closely related: the absence of string operators or at least an extension of the read "->" and write "<-" operators to allow I/O directly to/from strings.</li>
+</ul>
 </p>
 
 <p align=justify>
