@@ -24,7 +24,7 @@ define erase() {
    z = w = v = t = s = q = n = m = l = k = j = i = g = a = 0;
 }
 
-scale = 6;
+scale = 7;
 define trunc(x) {
    number sc; sc = scale, scale = 0, x /= 1, scale = sc; return x;
 }
