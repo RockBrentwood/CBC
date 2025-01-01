@@ -746,7 +746,8 @@ number GetNum(void) {
       CY = 0;
       for (digit *CP = DP; CP >= C->D; CP--) *CP = Div1(*CP, IBase);
    }
-   for (int I = 0; I < Digs; I++) { // Mantissa *= IBase, Mantissa += digit;
+   if (Digs == 1 && Decs == 1 && !Neg) CY = 0, *DP = AddMul1(*DP, 0x10, DD[0]); // 1-digit numerals are treated as hexadecimal.
+   else for (int I = 0; I < Digs; I++) { // Mantissa *= IBase, Mantissa += digit;
       digit g = (DD[I/Size] >> (I%Size*Bits))&((1 << Bits) - 1);
       CY = 0, *DP = AddMul1(*DP, IBase, g);
       for (digit *CP = DP + 1; CP < EP; CP++) *CP = AddMul1(*CP, IBase, 0);
